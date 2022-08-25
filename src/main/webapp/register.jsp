@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<%--- Code for navigation bar -->
+
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <!--Links-->
         <ul class="navbar-nav">
@@ -24,7 +24,7 @@
         </ul>
     </nav>
 
-//Code for registration form
+
 <div class="container">
   <h2>Registration form</h2>
   <form class="form-horizontal" action="register" id="regForm" method="post">

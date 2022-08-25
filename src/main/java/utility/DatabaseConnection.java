@@ -18,7 +18,7 @@ public class DatabaseConnection {
     public static Connection connect() {
         try {
             InputStream inputStream = DatabaseConnection.class.getClassLoader()
-                    .getResourceAsStream("/database.properties");
+                    .getResourceAsStream("database.properties");
             Properties properties = new Properties();
             properties.load(inputStream);
 

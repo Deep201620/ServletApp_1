@@ -7,12 +7,10 @@ import org.apache.logging.log4j.Logger;
 import utility.DatabaseConnection;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@WebFilter("/login")
 public class AuthenticationFilter implements Filter {
 
     private static final Logger LOGGER = LogManager.getLogger(LoginDao.class);

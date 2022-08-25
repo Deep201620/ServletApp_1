@@ -18,9 +18,9 @@ public interface IConstant {
     String NAME = "name";
 
     //FILE NAME CONSTANTS
-    String LOGIN = "login.jsp";
-    String WELCOME = "welcome.jsp";
-    String ERROR = "error.jsp";
+    String LOGIN_PAGE = "login.jsp";
+    String WELCOME_PAGE = "welcome.jsp";
+    String ERROR_PAGE = "error.jsp";
 
     //Header Constants
     String HEADER_PRAGMA = "Pragma";

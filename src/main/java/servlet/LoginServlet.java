@@ -45,10 +45,10 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute(IConstant.EMAIL, email);
                 session.setAttribute(IConstant.PASSWORD, password);
-                requestDispatcher = request.getRequestDispatcher(IConstant.WELCOME);
+                requestDispatcher = request.getRequestDispatcher(IConstant.WELCOME_PAGE);
                 requestDispatcher.forward(request, response);
             } else {
-                requestDispatcher = request.getRequestDispatcher(IConstant.ERROR);
+                requestDispatcher = request.getRequestDispatcher(IConstant.ERROR_PAGE);
                 requestDispatcher.forward(request, response);
                 LOGGER.info(IConstant.INVALID_MESSAGE_LOG);
             }

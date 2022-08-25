@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         session.invalidate();
         try {
-            RequestDispatcher rd = request.getRequestDispatcher(IConstant.LOGIN);
+            RequestDispatcher rd = request.getRequestDispatcher(IConstant.LOGIN_PAGE);
             rd.forward(request, response);
         } catch (ServletException | IOException exception) {
             System.out.println("Some error occured");

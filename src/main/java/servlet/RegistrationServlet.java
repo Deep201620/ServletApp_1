@@ -43,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
         try {
             if (registrationDao.registration(registrationBean)) {
                 LOGGER.info(REGISTRATION_LOG);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher(LOGIN);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
                 requestDispatcher.forward(request, response);
             }
         } catch (Exception exception) {

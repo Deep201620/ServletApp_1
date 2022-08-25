@@ -16,7 +16,7 @@ public class LoginDao {
             "ON CONFLICT (\"email\") DO UPDATE set \"logincounter\" = \"Login\".\"logincounter\"+1";
     private static final String SELECT_RECORD = "Select \"emailId\",password from \"Registration\" " +
             "where \"emailId\" = ? OR password = ?";
-    private Connection connection;
+    private static Connection connection;
 
     public boolean login(LoginBean loginBean) {
         connection = DatabaseConnection.connect();
