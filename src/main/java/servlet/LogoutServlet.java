@@ -17,9 +17,6 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
-        response.setHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_VALUE);
-        response.setHeader(HEADER_PRAGMA, PRAGMA_VALUE);
-
         HttpSession session = request.getSession(false);
         session.invalidate();
         try {

@@ -27,5 +27,6 @@ public interface IConstant {
     String HEADER_CACHE_CONTROL = "Cache-Control";
     String PRAGMA_VALUE = "no-cache";
     String CACHE_CONTROL_VALUE = "private, no-store, no-cache, must-revalidate";
+    String EXPIRE_DATE_HEADER = "Expires";
 
 }

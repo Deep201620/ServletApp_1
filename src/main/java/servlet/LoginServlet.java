@@ -27,9 +27,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_VALUE);
-        // Set standard HTTP/1.0 no-cache header.
-        response.setHeader(HEADER_PRAGMA, PRAGMA_VALUE);
 
         String email = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);

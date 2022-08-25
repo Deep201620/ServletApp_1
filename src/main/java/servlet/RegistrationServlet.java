@@ -32,10 +32,6 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
-        response.setHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_VALUE);
-        // Set standard HTTP/1.0 no-cache header.
-        response.setHeader(HEADER_PRAGMA, PRAGMA_VALUE);
-
         name = request.getParameter(NAME);
         email = request.getParameter(EMAIL);
         bDate = LocalDate.parse(request.getParameter(BDATE));
