@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static utility.IConstant.CONNECTION_SUCCESSFUL_LOG;
+
 public class DatabaseConnection {
 
     private static Connection connectionObj = null;
@@ -27,7 +29,7 @@ public class DatabaseConnection {
                     properties.getProperty("CONNECTION_USERNAME")
                     , properties.getProperty("CONNECTION_PASSWORD"));
             connectionObj.setAutoCommit(false);
-            LOGGER.info(IConstant.CONNECTION_SUCCESSFUL_LOG);
+            LOGGER.info(CONNECTION_SUCCESSFUL_LOG);
         } catch (ClassNotFoundException | SQLException | IOException exception) {
             exception.printStackTrace();
         }

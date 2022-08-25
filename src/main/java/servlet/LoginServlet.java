@@ -4,7 +4,6 @@ import bean.LoginBean;
 import dao.LoginDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utility.IConstant;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
 
     @Override
-    public void init(){
+    public void init() {
         loginDao = new LoginDao();
     }
 
@@ -32,8 +31,8 @@ public class LoginServlet extends HttpServlet {
         // Set standard HTTP/1.0 no-cache header.
         response.setHeader(HEADER_PRAGMA, PRAGMA_VALUE);
 
-        String email = request.getParameter(IConstant.EMAIL);
-        String password = request.getParameter(IConstant.PASSWORD);
+        String email = request.getParameter(EMAIL);
+        String password = request.getParameter(PASSWORD);
 
         LoginBean loginBean = new LoginBean();
         loginBean.setUserEmail(email);
@@ -41,16 +40,16 @@ public class LoginServlet extends HttpServlet {
         try {
             RequestDispatcher requestDispatcher;
             if (loginDao.login(loginBean)) {
-                LOGGER.info(IConstant.LOGIN_LOG);
+                LOGGER.info(LOGIN_LOG);
                 HttpSession session = request.getSession();
-                session.setAttribute(IConstant.EMAIL, email);
-                session.setAttribute(IConstant.PASSWORD, password);
-                requestDispatcher = request.getRequestDispatcher(IConstant.WELCOME_PAGE);
+                session.setAttribute(EMAIL, email);
+                session.setAttribute(PASSWORD, password);
+                requestDispatcher = request.getRequestDispatcher(WELCOME_PAGE);
                 requestDispatcher.forward(request, response);
             } else {
-                requestDispatcher = request.getRequestDispatcher(IConstant.ERROR_PAGE);
+                requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
                 requestDispatcher.forward(request, response);
-                LOGGER.info(IConstant.INVALID_MESSAGE_LOG);
+                LOGGER.info(INVALID_MESSAGE_LOG);
             }
         } catch (Exception exception) {
             exception.printStackTrace();
