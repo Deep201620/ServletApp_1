@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class LoginDao {
 
-    private static PreparedStatement preparedStatement;
+    private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
     private static final String INSERT_UPDATE_RECORD = "INSERT INTO \"Login\"(\"email\", \"logincounter\") VALUES (?, ?) " +

@@ -1,15 +1,18 @@
 package dao;
 
 
-import utility.DatabaseConnection;
 import bean.RegistrationBean;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utility.IConstant;
+import utility.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import static utility.IConstant.INSERTED_SUCCESSFUL_LOG;
+import static utility.IConstant.INSERTING_LOG;
 
 public class RegistrationDao {
 
@@ -22,7 +25,7 @@ public class RegistrationDao {
 
         try (Connection connection = DatabaseConnection.connect();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_RECORD)) {
-            LOGGER.info(IConstant.INSERTING_LOG);
+             LOGGER.info(INSERTING_LOG);
 
             preparedStatement.setString(1, registrationBean.getUserName());
             preparedStatement.setString(2, registrationBean.getEmailId());
@@ -32,12 +35,12 @@ public class RegistrationDao {
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
                 status = true;
-                LOGGER.info(IConstant.INSERTED_SUCCESSFUL_LOG);
+                LOGGER.info(INSERTED_SUCCESSFUL_LOG);
             }
             connection.commit();
             return status;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }

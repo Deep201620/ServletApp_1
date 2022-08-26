@@ -14,7 +14,7 @@ import static utility.IConstant.CONNECTION_SUCCESSFUL_LOG;
 
 public class DatabaseConnection {
 
-    private static Connection connectionObj = null;
+    private static Connection connection = null;
     private static final Logger LOGGER = LogManager.getLogger(DatabaseConnection.class);
 
     public static Connection connect() {
@@ -25,14 +25,14 @@ public class DatabaseConnection {
             properties.load(inputStream);
 
             Class.forName(properties.getProperty("DB_DRIVER"));
-            connectionObj = DriverManager.getConnection(properties.getProperty("CONNECTION_URL"),
+            connection = DriverManager.getConnection(properties.getProperty("CONNECTION_URL"),
                     properties.getProperty("CONNECTION_USERNAME")
                     , properties.getProperty("CONNECTION_PASSWORD"));
-            connectionObj.setAutoCommit(false);
+            connection.setAutoCommit(false);
             LOGGER.info(CONNECTION_SUCCESSFUL_LOG);
         } catch (ClassNotFoundException | SQLException | IOException exception) {
             exception.printStackTrace();
         }
-        return connectionObj;
+        return connection;
     }
 }

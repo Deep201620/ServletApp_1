@@ -49,7 +49,7 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
-    public RegistrationBean getRegisterBean() {
+    private RegistrationBean getRegisterBean() {
         RegistrationBean registrationBean = new RegistrationBean();
         registrationBean.setUserName(name);
         registrationBean.setEmailId(email);
