@@ -1,6 +1,7 @@
 package servlet;
 
-import javax.servlet.RequestDispatcher;
+import utility.RequestDispatcherUtility;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static utility.IConstant.*;
+import static utility.IConstant.LOGIN_PAGE;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
@@ -20,10 +21,9 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         session.invalidate();
         try {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
-            requestDispatcher.forward(request, response);
+            RequestDispatcherUtility.dispatchRequest(request,response,LOGIN_PAGE);
         } catch (ServletException | IOException exception) {
-            System.out.println("Some error occurred");
+            System.out.println("Logout failure due to: "+exception.getMessage());
         }
     }
 }

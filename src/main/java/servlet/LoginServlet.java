@@ -4,13 +4,16 @@ import bean.LoginBean;
 import dao.LoginDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import utility.RequestDispatcherUtility;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 
 import static utility.IConstant.*;
 
@@ -18,11 +21,13 @@ import static utility.IConstant.*;
 public class LoginServlet extends HttpServlet {
 
     private LoginDao loginDao;
+    private LoginBean loginBean;
     private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class);
 
     @Override
     public void init() {
         loginDao = new LoginDao();
+        loginBean = new LoginBean();
     }
 
     @Override
@@ -31,25 +36,25 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);
 
-        LoginBean loginBean = new LoginBean();
+//        LoginBean loginBean = new LoginBean();
         loginBean.setUserEmail(email);
         loginBean.setUserPassword(password);
         try {
-            RequestDispatcher requestDispatcher;
             if (loginDao.login(loginBean)) {
                 LOGGER.info(LOGIN_LOG);
-                HttpSession session = request.getSession();
-                session.setAttribute(EMAIL, email);
-                session.setAttribute(PASSWORD, password);
-                requestDispatcher = request.getRequestDispatcher(WELCOME_PAGE);
-                requestDispatcher.forward(request, response);
+                sessionManagement(request, email, password);
+                RequestDispatcherUtility.dispatchRequest(request,response,WELCOME_PAGE);
             } else {
-                requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
-                requestDispatcher.forward(request, response);
+                RequestDispatcherUtility.dispatchRequest(request,response,ERROR_PAGE);
                 LOGGER.info(INVALID_MESSAGE_LOG);
             }
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (ServletException | IOException exception) {
+          LOGGER.error(exception.getMessage());
         }
+    }
+    private void sessionManagement(HttpServletRequest httpServletRequest, String email, String password){
+        HttpSession session = httpServletRequest.getSession();
+        session.setAttribute(EMAIL, email);
+        session.setAttribute(PASSWORD, password);
     }
 }
